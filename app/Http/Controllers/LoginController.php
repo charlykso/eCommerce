@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -14,5 +17,25 @@ class LoginController extends Controller
     public function Signin()
     {
         return view("auth.signin");
+    }
+
+    public function getLogin(Request $req)
+    {
+        $user = User::where(['email' => $req->email])->first();
+        if (!$user || !Hash::check($req->password, $user->password)) {
+            return "Email or Password did not match";
+        }
+        else{
+            $req->session()->put('user', '$user');
+            return redirect('/');
+        }
+
+    }
+
+
+    public function logout(Request $request) {
+        Auth::logout();
+        $request->session_destroy;
+        return redirect('/signin');
     }
 }

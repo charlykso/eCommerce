@@ -18,11 +18,12 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', function(){
-    return view('index');
-});
+
 // Route::get('/signin', function(){
 //     return view('auth.signin');
 // });
 
-Route::get('/signin', [App\Http\Controllers\LoginController::class, 'Signin']);
+Route::get('/', [App\Http\Controllers\ProductController::class, 'index'])->name('index');
+Route::get('/signin', [App\Http\Controllers\LoginController::class, 'signin'])->name('Signin');
+Route::post('/signin', [App\Http\Controllers\LoginController::class, 'getLogin']);
+Route::get('/logout', [App\Http\Controllers\LoginController::class, 'logout'])->name('logout');

@@ -1,6 +1,9 @@
 .cart a{
     text-decoration: none;
 }
+.cart{
+    padding-right: 1em;
+}
 .main{
     min-height: 600px;
 }
@@ -16,4 +19,8 @@
     background-color: #e3f2fd;
     margin: 80px;
     padding: 50px;
+}
+.logout{
+    padding-left: 1em;
+    text-decoration: none;
 }
