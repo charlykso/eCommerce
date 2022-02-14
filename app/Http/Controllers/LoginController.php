@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Session;
 use Auth;
 
 class LoginController extends Controller
@@ -26,7 +27,7 @@ class LoginController extends Controller
             return "Email or Password did not match";
         }
         else{
-            $req->session()->put('user', '$user');
+            $req->session()->put('user', $user);
             return redirect('/');
         }
 
@@ -34,8 +35,9 @@ class LoginController extends Controller
 
 
     public function logout(Request $request) {
-        Auth::logout();
-        $request->session_destroy;
+
+        Session::forget('user');
+
         return redirect('/signin');
     }
 }

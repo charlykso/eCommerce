@@ -7,10 +7,7 @@
 .main{
     min-height: 600px;
 }
-.footer{
-    background-color: #e3f2fd;
-    height: 60px;
-}
+
 .center{
     text-align: center;
     padding-top: 10px;
@@ -23,4 +20,82 @@
 .logout{
     padding-left: 1em;
     text-decoration: none;
+}
+.carousel-item img{
+    height: 500px !important;
+}
+.trend_product{
+    margin-top: 10px;
+    justify-content: center;
+
+}
+.trending_wrapper{
+    text-align: center;
+    margin-left: 15px;
+}
+.inner_row{
+    border: 1px solid #000;
+    width: 300px;
+}
+/* .main{
+    background-color: green;
+} */
+.trend_product img{
+    height: 15em;
+    width: 18em;
+    overflow: hidden;
+}
+.content form button{
+    margin-bottom: 10px;
+}
+.content a{
+    text-decoration: none;
+}
+.content a:hover{
+    color: forestgreen;
+}
+.out li{
+    list-style-type: none !important;  
+}
+.forUser{
+    text-decoration: none !important;
+}
+.logout{
+    text-decoration: none !important;
+}
+.inner-out{
+    width: 20px !important;
+}
+.footer{
+    margin-top: 10px;
+    background-color: #e3f2fd;
+    height: 60px;
+}
+.product{
+    margin-top: 10px !important;
+}
+.detail-img{
+    height: 50vh;
+    width: 65vh;
+}
+.second form a{
+    color: #fff;
+    text-decoration: none;
+}
+.second form .back a:hover{
+    color: green;
+}
+.back{
+    text-decoration: none;
+}
+.checkout{
+    margin-top: 10px;
+    width: 12em;
+}
+.checkout a{
+    color: #000;
+    text-decoration: none;
+}
+.checkout a:hover{
+    color: green;
 }
