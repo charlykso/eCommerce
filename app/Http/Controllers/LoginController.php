@@ -15,7 +15,7 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function Signin()
+    public function signin()
     {
         return view("auth.signin");
     }

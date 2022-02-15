@@ -99,3 +99,30 @@
 .checkout a:hover{
     color: green;
 }
+
+/* for items in the cart */
+table tr td img{
+    height: 20vh;
+    width: 20vh;
+}
+table{
+    width: 100%;
+}
+table thead{
+    text-align: center;
+}
+.mytable tr td h4{
+    margin-top: 50px;
+}
+.mytable tr td h6{
+    margin-top: 50px;
+}
+.mytable tr td a{
+    margin-top: 50px;
+}
+.covertable{
+    background-color: red;
+}
+.divider{
+    margin-right: 6px;
+}

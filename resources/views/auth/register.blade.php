@@ -6,37 +6,35 @@
         <div class="col-sm-6 offset-sm-3 ">
             <div class="central">
                 @include('inc.messages')
-                <h4 class="text-center">Signin</h4>
-                <form action="signin" method="POST">
+                <h4 class="text-center">SignUp</h4>
+                <form action="register" method="POST">
                     @csrf
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" required="required" class="form-control" placeholder="Enter name">
+                        <small id="name" class="form-text text-muted"></small>
+                    </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
                         <input type="email" name="email" required="required" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
                         <small id="emailHelp" class="form-text text-muted"></small>
-                        @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
                         <input type="password" name="password" required="required" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </div>
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Remember Me</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Login</button>
-                    <button class="btn btn-default"><a href="{{route('Register')}}">Register</a></button>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Confirm Password</label>
+                        <input type="password" name="password_confirmation" required="required" class="form-control" placeholder="Confirm Password">
+                        <small class="form-text" style="color: #e91e63">
+                            Your password must be 6 characters long.
+                        </small>
+                    </div>                    
+                    <button type="submit" class="btn btn-primary">Register</button>
+                    <button class="btn btn-default"><a href="{{route('Signin')}}">Signin</a></button>
 
                 </form>
-                
+
             </div>
         </div>
     </div>

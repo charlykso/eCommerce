@@ -22,4 +22,9 @@ class Product extends Model
     {
         return $this->hasMany('App\Models\Cart');
     }
+
+     public function getHowManyOrders()
+    {
+        return $this->hasMany('App\Models\Order');
+    }
 }

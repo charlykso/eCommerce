@@ -22,7 +22,7 @@
 <body>
     <div class="container">
         <nav class="navbar sticky-top navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-            <a class="navbar-brand" href="#">Logo</a>
+            <a class="navbar-brand" href="/"><img width="50px" height="40px" src="{{asset('images/s-logo.png')}}" alt=""></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -30,10 +30,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="/myPlacedOrders">My Orders</a>
                 </li>
                 
                 </ul>
@@ -52,15 +52,18 @@
                             </li>
                         </ul>
                     </div>
-                    <span> | </span>
+                    <span class="divider"> | </span>
                 @else
-                    <a class="nav-link " href="/singin">
+                    <a class="nav-link " href="{{route('Signin')}}">
                         Signin
+                    </a>
+                    <a class="nav-link " href="{{route('Register')}}">
+                        Register
                     </a>
 
                 @endif
                 
-                <span class="cart"><a href="#"><i class="fa fa-cart-plus light" aria-hidden="true"></i>({{$noOfItems}})</a></span>
+                <span class="cart"><a href="/cartlist"> <i class="fa fa-cart-plus light" aria-hidden="true"></i>({{$noOfItems}})</a></span>
 
             </div>
         </nav>

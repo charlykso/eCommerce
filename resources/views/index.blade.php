@@ -45,6 +45,8 @@
 
     <div class="trending_wrapper">
         <h3>Trending Products</h3>
+        @include('inc.messages')
+
         <div class="row">
             @foreach ($products as $item)
             <div class="trend_product col-md-4">

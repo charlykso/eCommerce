@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Cart;
+use App\Models\Order;
 use Session;
 
 class ProductController extends Controller
@@ -104,6 +106,21 @@ class ProductController extends Controller
     }
 
 
+
+    public function myCartList()
+    {
+        $userId = Session::get('user')['id'];
+        // $myProducts = $user->getProductInCart;
+        $myProducts = DB::table('cart')
+        ->join('products', 'cart.product_id', '=' , 'products.id')
+        ->where('cart.user_id', $userId)
+        ->select('products.*', 'cart.id as cart_id')
+        ->get();
+        // dd($myProducts);
+        return view('cartlist', ['myProducts' => $myProducts]);
+    }
+
+
     
     /**
      * Display the specified resource.
@@ -116,6 +133,71 @@ class ProductController extends Controller
         // return Product::find($id);
         $data = Product::find($id);
         return view('productDetail', ['product' => $data]);
+    }
+
+
+
+    public function OrderNow()
+    {
+         $userId = Session::get('user')['id'];
+        // $myProducts = $user->getProductInCart;
+        $total = DB::table('cart')
+        ->join('products', 'cart.product_id', '=' , 'products.id')
+        ->where('cart.user_id', $userId)
+        ->sum('products.price');
+        // dd($myProducts);
+        return view('ordernow', ['total' => $total]);
+    }
+
+
+    public function placeOrderNow(Request $request)
+    {
+        //validat request details
+        $request->validate([
+            'address' => 'required|string|max:255',
+            'payment_method' => 'required|string|max:255'
+        ]);
+
+        // $user = Session::get('user');
+        // $allCart = $user->getProductInCart;
+        // dd($allCart);
+        $userId = Session::get('user')['id'];
+        $allCart = Cart::where('user_id', $userId)->get();
+        
+        foreach ($allCart as $cart) {
+            $order = new Order();
+            $order->product_id = $cart['product_id'];
+            $order->user_id = $cart['user_id'];
+            $order->status = "Pending";
+            $order->payment_method = $request->payment_method;
+            $order->payment_status = "Pending";
+            $order->address = $request->address;
+            $order->save();
+
+            Cart::where('user_id', $userId)->delete();
+
+        }
+
+        return redirect('/')->with('success', "Order completed");
+
+    }
+
+
+    public function MyPlacedOrders(){
+
+        $userId = Session::get('user')['id'];
+        // $myOders = Orders::where('user_id', $userId)->get();
+        $myOders = DB::table('orders')
+        ->join('products', 'orders.product_id', '=' , 'products.id')
+        ->where('orders.user_id', $userId)
+        ->select('products.*', 'orders.id as order_id', 'orders.status', 'orders.payment_method', 'orders.payment_status', 'orders.created_at as order_date')
+        ->get();
+        $myCount = count($myOders);
+        $context = [
+            'myOders' => $myOders,
+            'myCount' => $myCount
+        ];
+        return view('myPlacedOrders')->with($context);
     }
 
     /**
@@ -147,8 +229,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function DeleteItem($id)
     {
-        //
+        Cart::destroy($id);
+
+        return redirect('cartlist');
     }
 }
