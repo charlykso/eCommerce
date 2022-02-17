@@ -18,10 +18,8 @@
                     <button type="submit" class="btn btn-primary">Add to cart</button>
                     <button class="btn btn-info back"><a href="/">Go Back</a></button>
                     <br>
-
                 </form>
-                <button class="btn btn-secondry checkout"><a href="#">Check out</a></button>
-                
+                <button class="btn btn-secondry checkout"><a href="/cartlist">Check out</a></button>  
             </div>
 
         </div>

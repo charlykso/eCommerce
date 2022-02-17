@@ -68,7 +68,10 @@
             </div>
         </nav>
         {{-- @include('header') --}}
+        
+        @include('inc.messages')
         @yield('content')
+
         {{-- @include('footer') --}}
         <div class="footer">
             <p class="center">

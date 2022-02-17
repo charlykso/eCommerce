@@ -6,79 +6,38 @@
         <div class="col-sm-6 offset-sm-3 ">
             <div class="central">
                 <h4 class="text-center">Create Product</h4>
-                
-                @if(session('success'))
-                <div class="alert alert-success">
-                    {{session('success')}}
-                </div>
-                @endif
-                {{-- @if(Session::has('Success'))
-                <script type="text/javascript">
-                    swal({
-                        title: 'Success!'
-                        , text: "{{Session::get('Success')}}"
-                        , timer: 5000
-                        , type: 'success'
-                    }).then((value) => {
-                        location.reload();
-                    }).catch(swal.noop);
-
-                </script>
-                @endif --}}
-
-                @include('inc.messages')
                 <form method="POST" action="{{ url('product/upload')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="exampleInputEmail1">Product Name</label>
-                        <input type="text" name="Pname" required="required" class="form-control @error('Pname') is-invalid @enderror"  placeholder="Enter product name">
+                        <input type="text" name="Pname" required="required" class="form-control"  placeholder="Enter product name">
                         <small id="emailHelp" class="form-text text-muted"></small>
-                        @error('Pname')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Product Price</label>
-                        <input type="number" name="price" required="required" class="form-control @error('price') is-invalid @enderror"  placeholder="Enter price e.g 1000">
+                        <input type="number" name="price" required="required" class="form-control "  placeholder="Enter price e.g 1000">
                         <small id="emailHelp" class="form-text text-muted"></small>
-                        @error('price')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Product Description</label>
-                        <input type="text" name="description" required="required" class="form-control @error('description') is-invalid @enderror" placeholder="Enter product description">
+                        <input type="text" name="description" required="required" class="form-control" placeholder="Enter product description">
                         <small id="emailHelp" class="form-text text-muted"></small>
-                        @error('description')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        
                     </div>
                     <div class="form-group">
                         <label for="category">Product Category</label>
-                        <input type="text" name="category" required="required" class="form-control @error('category') is-invalid @enderror" placeholder="Enter product category eg mobile, television etc">
+                        <input type="text" name="category" required="required" class="form-control" placeholder="Enter product category eg mobile, television etc">
                         <small id="category" class="form-text text-muted"></small>
-                        @error('category')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
+                       
                     </div>
 
                     <div class="form-group">
                         <label for="exampleInputEmail1">Product Picture</label>
-                        <input type="file" name="picture" required="required" class="form-control @error('picture') is-invalid @enderror" >
+                        <input type="file" name="picture" required="required" class="form-control" >
                         <small id="emailHelp" class="form-text text-muted"></small>
-                        @error('picture')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                        
                     </div>
                     
                     <button type="submit" class="btn btn-primary">Upload</button>

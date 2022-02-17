@@ -24,7 +24,8 @@ class LoginController extends Controller
     {
         $user = User::where(['email' => $req->email])->first();
         if (!$user || !Hash::check($req->password, $user->password)) {
-            return "Email or Password did not match";
+
+            return view('auth.signin')->with('error', "Email or Password did not match");
         }
         else{
             $req->session()->put('user', $user);

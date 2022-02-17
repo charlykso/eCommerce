@@ -74,6 +74,8 @@ class ProductController extends Controller
         $product->gallery = $fileNameToStore;
         $product->category = $request->input('category');
         $product->save();
+
+        $request->session()->flash('Pname', $product->name);
         
         return redirect('product/create')->with('success', 'product successfully created');
     }
@@ -109,15 +111,24 @@ class ProductController extends Controller
 
     public function myCartList()
     {
-        $userId = Session::get('user')['id'];
-        // $myProducts = $user->getProductInCart;
-        $myProducts = DB::table('cart')
-        ->join('products', 'cart.product_id', '=' , 'products.id')
-        ->where('cart.user_id', $userId)
-        ->select('products.*', 'cart.id as cart_id')
-        ->get();
-        // dd($myProducts);
-        return view('cartlist', ['myProducts' => $myProducts]);
+        if (Session::has('user')) {
+            $userId = Session::get('user')['id'];
+            // $myProducts = $user->getProductInCart;
+            $myProducts = DB::table('cart')
+            ->join('products', 'cart.product_id', '=' , 'products.id')
+            ->where('cart.user_id', $userId)
+            ->select('products.*', 'cart.id as cart_id')
+            ->get();
+            $allCart = Cart::where('user_id', $userId)->get();
+            $numAllCart = count($allCart);
+            $data = [
+                'myProducts' => $myProducts,
+                'myCartNo' => $numAllCart
+            ];
+            // dd($myProducts);
+            return view('cartlist')->with($data);
+        }
+        return view('auth.signin');
     }
 
 
@@ -185,19 +196,22 @@ class ProductController extends Controller
 
     public function MyPlacedOrders(){
 
-        $userId = Session::get('user')['id'];
-        // $myOders = Orders::where('user_id', $userId)->get();
-        $myOders = DB::table('orders')
-        ->join('products', 'orders.product_id', '=' , 'products.id')
-        ->where('orders.user_id', $userId)
-        ->select('products.*', 'orders.id as order_id', 'orders.status', 'orders.payment_method', 'orders.payment_status', 'orders.created_at as order_date')
-        ->get();
-        $myCount = count($myOders);
-        $context = [
-            'myOders' => $myOders,
-            'myCount' => $myCount
-        ];
-        return view('myPlacedOrders')->with($context);
+        if (Session::has('user')) {
+            $userId = Session::get('user')['id'];
+            // $myOders = Orders::where('user_id', $userId)->get();
+            $myOders = DB::table('orders')
+            ->join('products', 'orders.product_id', '=' , 'products.id')
+            ->where('orders.user_id', $userId)
+            ->select('products.*', 'orders.id as order_id', 'orders.status', 'orders.payment_method', 'orders.payment_status', 'orders.created_at as order_date')
+            ->get();
+            $myCount = count($myOders);
+            $context = [
+                'myOders' => $myOders,
+                'myCount' => $myCount
+            ];
+            return view('myPlacedOrders')->with($context);
+        }
+        return view('auth.signin');
     }
 
     /**
